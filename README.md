@@ -91,7 +91,7 @@ This project analyzes different parts of the data job market. In this section, I
 To answer this question, I first identified the three most popular data roles. Then, I analyzed the skills required for each role and found the top 5 most demanded skills.
 
 This analysis helps understand which skills are important for each data career path and which skills aspiring data professionals should focus on learning.
-View my notebook with detailed steps here: [2_Skill_Demand.](2_Skill_Demand.ipynb)
+View my notebook with detailed steps here: [2_Skill_Demand.](Notebooks/2_Skill_Demand.ipynb)
 # Visualize Data
 ```python
 fig, ax = plt.subplots(len(job_titles), 1)
@@ -116,7 +116,7 @@ plt.show()
 
 To analyze how skills are trending in 2023 for Data Analysts, I filtered Data Analyst job postings and grouped the skills by the month of the job postings. This helped identify the top 5 most demanded skills by month and visualize how skill demand changed throughout 2023.
 
-View my notebook with detailed steps here: [3_Skills_Trend.](_Skills_Trend.ipynb)
+View my notebook with detailed steps here: [3_Skills_Trend.](Notebooks/3_Skills_Trend.ipynb)
 ### Visualize Data
 ```python
 from matplotlib.ticker import PercentFormatter
