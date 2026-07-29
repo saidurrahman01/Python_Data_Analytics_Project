@@ -1,0 +1,143 @@
+# Data Analyst Job Market Analysis
+
+## Overview
+
+Welcome to my **Data Analyst Job Market Analysis** project!
+
+This project explores the **US Data Analyst job market** using real-world job posting data. The main goal is to understand which skills are most in-demand, which skills lead to higher-paying opportunities, and what aspiring Data Analysts should focus on to build a successful career.
+
+The dataset used in this project is sourced from **Luke Barousse's Python Data Analytics Course** and contains detailed information about job titles, salaries, locations, and required skills. Using Python, I analyze this data through data cleaning, **Exploratory Data Analysis (EDA)**, and visualization to uncover valuable insights about the Data Analyst job market.
+
+Through this project, I aim to demonstrate my skills in data analysis and provide data-driven insights that can help job seekers make better career decisions.
+
+---
+
+## The Questions
+
+This project aims to answer the following questions:
+
+1. What are the most in-demand skills for the top 3 most popular data roles?
+
+2. How are in-demand skills trending for Data Analysts?
+
+3. How well do Data Analyst jobs and skills pay?
+
+4. What are the optimal skills for Data Analysts to learn?  
+   *(High Demand AND High Paying)*
+
+---
+
+## Tools I Used
+
+For this analysis, I used the following tools and technologies:
+
+### Python
+
+The main programming language used for data analysis and extracting insights.
+
+### Python Libraries
+
+- **Pandas** → Used for data cleaning, manipulation, and analysis.
+- **NumPy** → Used for numerical operations.
+- **Matplotlib** → Used for creating data visualizations.
+- **Seaborn** → Used for creating advanced statistical visualizations.
+
+### Jupyter Notebook
+
+Used for writing and executing Python code, documenting analysis, and presenting findings.
+
+### Visual Studio Code
+
+Used as my development environment for writing and managing Python scripts.
+
+### Git & GitHub
+
+Used for version control, project management, and sharing my work publicly.
+# Data Preparation and Cleanup
+This section outlines the steps taken to prepare the data for analysis, ensuring accuracy and usability.
+
+```python
+# Importing Libraries
+import ast
+import pandas as pd
+import seaborn as sns
+from datasets import load_dataset
+import matplotlib.pyplot as plt  
+
+# Loading Data
+dataset = load_dataset('lukebarousse/data_jobs')
+df = dataset['train'].to_pandas()
+
+# Data Cleanup
+df['job_posted_date'] = pd.to_datetime(df['job_posted_date'])
+
+df['job_skills'] = df['job_skills'].apply(
+    lambda x: ast.literal_eval(x) if pd.notna(x) else x
+)
+```
+## Filter US Jobs
+
+To focus on the U.S. job market, I filtered the dataset and kept only job postings from the United States.
+
+```python
+df_US = df[df['job_country'] == 'United States']
+```
+# Analysis
+
+This project analyzes different parts of the data job market. In this section, I focused on finding the most demanded skills for the top three popular data roles.
+
+# 1. What are the most demanded skills for the top 3 most popular data roles?
+
+To answer this question, I first identified the three most popular data roles. Then, I analyzed the skills required for each role and found the top 5 most demanded skills.
+
+This analysis helps understand which skills are important for each data career path and which skills aspiring data professionals should focus on learning.
+View my notebook with detailed steps here: [2_Skill_Demand.](2_Skill_Demand.ipynb)
+# Visualize Data
+```python
+fig, ax = plt.subplots(len(job_titles), 1)
+
+
+for i, job_title in enumerate(job_titles):
+    df_plot = df_skills_perc[df_skills_perc['job_title_short'] == job_title].head(5)[::-1]
+    sns.barplot(data=df_plot, x='skill_percent', y='job_skills', ax=ax[i], hue='skill_count', palette='dark:b_r')
+
+plt.show()
+```
+### Results
+![Likelihood of Skills Requested in US Job Postings](Images/Likelihood_of_Skills_Requested_in_US_Job_Postings.png)
+
+*Bar graph visualizing the salary for the top 3 data roles and their top 5 skills associated with each.*
+# Insights:
+- SQL is the most requested skill for Data Analysts and Data Scientists, with it in over half the job postings for both roles. For - Data Engineers, Python is the most sought-after skill, appearing in 68% of job postings.
+- Data Engineers require more specialized technical skills (AWS, Azure, Spark) compared to Data Analysts and Data Scientists who are - expected to be proficient in more general data management and analysis tools (Excel, Tableau).
+- Python is a versatile skill, highly demanded across all three roles, but most prominently for Data Scientists (72%) and Data Engineers (65%).
+
+## 2. How are in-demand skills trending for Data Analysts?
+
+To analyze how skills are trending in 2023 for Data Analysts, I filtered Data Analyst job postings and grouped the skills by the month of the job postings. This helped identify the top 5 most demanded skills by month and visualize how skill demand changed throughout 2023.
+
+View my notebook with detailed steps here: [3_Skills_Trend.](_Skills_Trend.ipynb)
+### Visualize Data
+```python
+from matplotlib.ticker import PercentFormatter
+
+df_plot = df_DA_US_percent.iloc[:, :5]
+sns.lineplot(data=df_plot, dashes=False, legend='full', palette='tab10')
+
+plt.gca().yaxis.set_major_formatter(PercentFormatter(decimals=0))
+
+plt.show()
+```
+### Results
+
+![Trending Top Skills for Data Analysts in the US](Images/Trending_Top_Skills_Data_Analysts_US.png)
+
+*Bar graph visualizing the trending top skills for data analysts in the US in 2023.*
+
+### Insights:
+
+- **SQL** remained the most consistently demanded skill throughout 2023, maintaining its position as one of the most important skills for Data Analyst roles, despite a slight decline in demand over time.
+- **Excel** showed a noticeable increase in demand toward the end of the year, becoming more competitive with other essential analytics skills such as Python and Tableau.
+- **Python** maintained steady demand throughout 2023, highlighting its importance for data analysis, automation, and advanced analytics tasks.
+- **Tableau** also showed relatively stable demand with minor fluctuations, continuing to be a valuable skill for data visualization and reporting.
+- **Power BI** had lower demand compared to the other top skills but showed a positive upward trend, reflecting the growing importance of business intelligence and dashboarding tools.
