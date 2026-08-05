@@ -212,5 +212,3 @@ Here's the breakdown of the highest-paid & most in-demand skills for data analys
 - The bottom graph shows that common skills like `SQL`, `Excel`, and `PowerPoint` are the most demanded skills by employers. These skills may not have the highest salaries, but they are important for getting Data Analyst jobs.
 
 - The results show that the highest-paying skills are not always the most demanded skills. Data Analysts should build a balanced skill set by learning both popular tools and specialized skills to improve career opportunities.
-
-## 4. What are the most optimal skills to learn for Data Analysts?
